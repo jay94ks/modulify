@@ -28,15 +28,17 @@ namespace Modulify.Documents.Internals
         /// <inheritdoc/>
         public bool CanSupport(Stream Input)
         {
-            using var Reader = new StreamReader(Input, Encoding.UTF8, true, -1, true);
-
-            try
+            using (var Reader = new StreamReader(Input, Encoding.UTF8, true, -1, true))
             {
-                var Json = JsonConvert.DeserializeObject<JObject>(Reader.ReadToEnd());
-                return Json != null && m_Module.CanSupport(Json);
+                try
+                {
+                    var Json = JsonConvert.DeserializeObject<JObject>(Reader.ReadToEnd());
+                    return Json != null && m_Module.CanSupport(Json);
+                }
+
+                catch { }
             }
 
-            catch { }
             return false;
         }
 
@@ -49,12 +51,13 @@ namespace Modulify.Documents.Internals
         /// <inheritdoc/>
         public IDocument Deserialize(Stream Input)
         {
-            using var Reader = new StreamReader(Input, Encoding.UTF8, true, -1, true);
+            using (var Reader = new StreamReader(Input, Encoding.UTF8, true, -1, true))
+            {
+                var Json = JsonConvert.DeserializeObject<JObject>(Reader.ReadToEnd());
+                if (Json != null)
+                    return m_Module.Deserialize(Json);
 
-            var Json = JsonConvert.DeserializeObject<JObject>(Reader.ReadToEnd());
-            if (Json != null)
-                return m_Module.Deserialize(Json);
-
+            }
             return null;
         }
 
@@ -62,7 +65,8 @@ namespace Modulify.Documents.Internals
         public void Serialize(Stream Output, IDocument Input)
         {
             var Json = m_Module.Serialize(Input) ?? new JObject();
-            Output.Write(Encoding.UTF8.GetBytes(Json.ToString()));
+            var Bytes = Encoding.UTF8.GetBytes(Json.ToString());
+            Output.Write(Bytes, 0, Bytes.Length);
         }
     }
 }

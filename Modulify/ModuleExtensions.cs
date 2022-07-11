@@ -35,7 +35,7 @@ namespace Modulify
 
             foreach(var Each in TypeSet)
             {
-                if (ChildType.IsAssignableTo(Each))
+                if (Each.IsAssignableFrom(ChildType))
                     yield return Each;
             }
         }
