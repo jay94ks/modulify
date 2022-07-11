@@ -23,7 +23,7 @@ namespace Modulify.DependencyInjection.Extensions
         public static IServiceCollection Modulify(this IServiceCollection Services, Action<IModuleCollection> Configure = null)
         {
             var Descriptor = Services.FirstOrDefault(X => X.ServiceType == typeof(HiddenModuleCollection));
-            if (Descriptor is null || Descriptor.ImplementationInstance is not HiddenModuleCollection Collection)
+            if (Descriptor is null || !(Descriptor.ImplementationInstance is HiddenModuleCollection Collection))
             {
                 Services
                     .AddSingleton(Collection = new HiddenModuleCollection())
@@ -99,7 +99,7 @@ namespace Modulify.DependencyInjection.Extensions
             Services.Modulify();
 
             var Descriptor = Services.FirstOrDefault(X => X.ServiceType == typeof(HiddenModuleRegistration));
-            if (Descriptor is null || Descriptor.ImplementationInstance is not HiddenModuleRegistration Registration)
+            if (Descriptor is null || !(Descriptor.ImplementationInstance is HiddenModuleRegistration Registration))
                 Services.AddSingleton(Registration = new HiddenModuleRegistration());
 
             if (!Registration.Singleton.Contains(Factory))
@@ -132,7 +132,7 @@ namespace Modulify.DependencyInjection.Extensions
             Services.Modulify();
 
             var Descriptor = Services.FirstOrDefault(X => X.ServiceType == typeof(HiddenModuleRegistration));
-            if (Descriptor is null || Descriptor.ImplementationInstance is not HiddenModuleRegistration Registration)
+            if (Descriptor is null || !(Descriptor.ImplementationInstance is HiddenModuleRegistration Registration))
                 Services.AddSingleton(Registration = new HiddenModuleRegistration());
 
             if (!Registration.Scoped.Contains(Factory))

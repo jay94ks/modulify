@@ -10,12 +10,12 @@ namespace Modulify.DependencyInjection.Extensions
             /// <summary>
             /// Singleton factories.
             /// </summary>
-            public List<Func<IServiceProvider, IModule>> Singleton = new();
+            public List<Func<IServiceProvider, IModule>> Singleton = new List<Func<IServiceProvider, IModule>>();
 
             /// <summary>
             /// Scoped factories.
             /// </summary>
-            public List<Func<IServiceProvider, IModule>> Scoped = new();
+            public List<Func<IServiceProvider, IModule>> Scoped = new List<Func<IServiceProvider, IModule>>();
         }
 
         

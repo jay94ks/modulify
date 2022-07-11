@@ -8,7 +8,7 @@
     <RepositoryUrl>https://github.com/jay94ks/modulify.git</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
     <Description>Modulify framework that is a series of IServiceProvider in dotnet.</Description>
-    <PackageLicenseFile>README.md</PackageLicenseFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\README.md">
+    <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
