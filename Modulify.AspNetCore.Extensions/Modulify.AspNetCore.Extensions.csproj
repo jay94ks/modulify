@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Modulify\Modulify.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Internals\" />
+  </ItemGroup>
+
+</Project>
